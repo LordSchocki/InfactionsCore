@@ -1,0 +1,4 @@
+name: InfactionsCore
+version: '${version}'
+main: me.ventilover.infactionscore.InfactionsCore
+api-version: '1.20'
