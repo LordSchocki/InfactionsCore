@@ -2,3 +2,14 @@ name: InfactionsCore
 version: '${version}'
 main: me.ventilover.infactionscore.InfactionsCore
 api-version: '1.20'
+description: The main plugin for the faction system
+authors:
+  - LordSchocki
+  - VentiLover
+  - skuchsa44
+
+commands:
+
+
+permissions:
+
