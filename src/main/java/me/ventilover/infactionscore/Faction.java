@@ -3,17 +3,21 @@ package me.ventilover.infactionscore;
 import org.bukkit.entity.Player;
 
 import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 public class Faction { //this is a faction class it will hold the name of the faction, claim amount, etc.
     //variables for the faction
     private final String name;
     private final HashMap<UUID,FactionRole> memberHashMap;
-    private Integer power;
+    private int factionPower;//power of a faction
+    private int factionBalance;//balance of a faction
 
-    public Faction(String name){
+    public Faction(String name,int factionPower,int factionBalance){
         this.name = name;
         this.memberHashMap = new HashMap<>();
+        this.factionPower = factionPower;
+        this.factionBalance = factionBalance;
     }
 
     public String getFactionName() {
@@ -25,26 +29,6 @@ public class Faction { //this is a faction class it will hold the name of the fa
         memberHashMap.put(player.getUniqueId(),factionRole);
     }
 
-    public void addPower(int powerToAdd){
-        //power cant be more than 10
-        if ((powerToAdd+power) > 10){
-            power = 10;
-
-        }
-        else {
-            power += powerToAdd;
-        }
-
-    }
-
-    public void decrementPower(int powerToRemove){
-        if ((power-powerToRemove) < -10){
-            power = -10;
-        }
-        else {
-            power -= powerToRemove;
-        }
-    }
 
     public void removePlayerFromFaction(Player player) throws FactionRoleException {
         //first check if its owner, if not, it's okay to remove them
@@ -57,13 +41,20 @@ public class Faction { //this is a faction class it will hold the name of the fa
     }
 
     public FactionRole checkFactionRole(Player player){
-        return memberHashMap.get(player.getUniqueId());
+        return memberHashMap.get(player.getUniqueId()); //method to check the faction role of the player
     }
 
     public void changePlayerRole(Player player,FactionRole factionRole){
         memberHashMap.put(player.getUniqueId(),factionRole); //maybe gonna need an f player class for that
     }
 
+    public void calculateFactionPower(){
+        FactionPlayerManager playerManager = FactionPlayerManager.getInstance();
+        for (Map.Entry<UUID,FactionRole> entry: memberHashMap.entrySet()){ //method to calculate the whole faction power with each member
+            factionPower += playerManager.getFactionPlayer(entry.getKey()).getPower(); //increase the faction power for each member
+
+        }
+    }
 
 
     //enum set for the roles
