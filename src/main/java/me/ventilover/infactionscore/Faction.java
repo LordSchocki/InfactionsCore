@@ -1,7 +1,9 @@
 package me.ventilover.infactionscore;
 
+import org.bukkit.Chunk;
 import org.bukkit.entity.Player;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -12,9 +14,11 @@ public class Faction { //this is a faction class it will hold the name of the fa
     private final HashMap<UUID,FactionRole> memberHashMap;
     private int factionPower;//power of a faction
     private int factionBalance;//balance of a faction
+    private ArrayList<Chunk> claimedChunkArrayList;
 
     public Faction(String name,int factionPower,int factionBalance){
         this.name = name;
+        this.claimedChunkArrayList = new ArrayList<>();
         this.memberHashMap = new HashMap<>();
         this.factionPower = factionPower;
         this.factionBalance = factionBalance;
@@ -63,5 +67,13 @@ public class Faction { //this is a faction class it will hold the name of the fa
         CO_LEADER,
         ELDER,
         MEMBER
+    }
+
+    public void addChunkToFaction(Chunk chunk){
+        claimedChunkArrayList.add(chunk);
+    }
+
+    public void removeChunkFromFaction(Chunk chunk){
+        claimedChunkArrayList.remove(chunk);
     }
 }
