@@ -1,12 +1,16 @@
 package me.ventilover.infactionscore;
 
+import org.yaml.snakeyaml.Yaml;
+
 import java.util.UUID;
 
 public class FactionPlayer {
     private Integer power;
+    private Integer balance;
 
-    FactionPlayer(int power){
+    FactionPlayer(int power,int balance){
         this.power = power;
+        this.balance = balance;
     }
 
     public Integer getPower() {
@@ -32,5 +36,15 @@ public class FactionPlayer {
         else {
             power -= powerToRemove;
         }
+    }
+
+    public String serialize(){
+        Yaml yaml = new Yaml();
+        return yaml.dump(this);
+    }
+
+    public static FactionPlayer deserializse(String yamlStr){
+        Yaml yaml = new Yaml();
+        return yaml.loadAs(yamlStr,FactionPlayer.class);
     }
 }
