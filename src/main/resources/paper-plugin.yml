@@ -9,7 +9,14 @@ authors:
   - skuchsa44
 
 commands:
-
+  faction:
+    description: See other faction commands
+    usage: /faction
+    aliases: [factions]
+    permission: infactionscore.faction
 
 permissions:
+  infactionscore.faction:
+    description: Allows use of the faction command
+    default: true
 
