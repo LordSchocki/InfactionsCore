@@ -13,10 +13,12 @@ public final class InfactionsCore extends JavaPlugin {
 
 
 
-        getServer().getPluginManager().registerEvents(null,this); //register event listener here
+       // getServer().getPluginManager().registerEvents(null,this); //register event listener here
 
         //create the commandMap for commands
         CommandMap commandMap = Bukkit.getCommandMap();
+
+        commandMap.register("faction",new FactionCommand()); //register the commands
 
         getLogger().info("InfactionsCore has started!");//logger message
     }
