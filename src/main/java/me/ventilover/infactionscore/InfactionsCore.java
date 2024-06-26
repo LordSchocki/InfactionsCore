@@ -18,9 +18,15 @@ public final class InfactionsCore extends JavaPlugin {
         //create the commandMap for commands
         CommandMap commandMap = Bukkit.getCommandMap();
 
-        commandMap.register("faction",new FactionCommand()); //register the commands
+        commandMap.register("fhelp",new FactionHelpCommand()); //register the commands
 
+        commandMap.register("flist", new FactionListCommand());
+
+        commandMap.register("faction", new FactionCommand());
+
+        SnippedTest.testSnippet();
         getLogger().info("InfactionsCore has started!");//logger message
+        getLogger().info(FactionManager.getInstance().factionArrayList.getFirst().toString());
     }
 
     @Override
