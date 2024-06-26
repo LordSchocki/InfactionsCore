@@ -2,7 +2,6 @@ package me.ventilover.infactionscore;
 
 import org.yaml.snakeyaml.Yaml;
 
-import java.util.UUID;
 
 public class FactionPlayer {
     private Integer power;
