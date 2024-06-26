@@ -11,12 +11,18 @@ authors:
 commands:
   faction:
     description: See other faction commands
-    usage: /faction
+    usage: /faction help
     aliases: [factions]
-    permission: infactionscore.faction
+    permission: infactionscore.factionhelp
+  faction list:
+    description: See other factions on the server
+    usage: /faction list
+    permission: infactionscore.factionlist
 
 permissions:
-  infactionscore.faction:
+  infactionscore.factionhelp:
     description: Allows use of the faction command
     default: true
-
+  infactionscore.factionlist:
+    description: Allows use of the faction list command
+    default: true
