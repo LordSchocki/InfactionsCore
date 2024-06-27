@@ -5,11 +5,9 @@ import org.yaml.snakeyaml.Yaml;
 
 public class FactionPlayer {
     private Integer power;
-    private Integer balance;
 
-    FactionPlayer(int power,int balance){
+    FactionPlayer(int power){
         this.power = power;
-        this.balance = balance;
     }
 
     public Integer getPower() {

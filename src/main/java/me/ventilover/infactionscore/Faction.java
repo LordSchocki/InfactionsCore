@@ -13,7 +13,6 @@ public class Faction { //this is a faction class it will hold the name of the fa
     private final String name;
     private final HashMap<UUID,FactionRole> memberHashMap;
     private int factionPower;//power of a faction
-    private int factionBalance;//balance of a faction
     private ArrayList<Chunk> claimedChunkArrayList;
 
     public Faction(String name,int factionPower,int factionBalance){
@@ -21,7 +20,6 @@ public class Faction { //this is a faction class it will hold the name of the fa
         this.claimedChunkArrayList = new ArrayList<>();
         this.memberHashMap = new HashMap<>();
         this.factionPower = factionPower;
-        this.factionBalance = factionBalance;
     }
 
     public String getFactionName() {
@@ -49,7 +47,7 @@ public class Faction { //this is a faction class it will hold the name of the fa
     }
 
     public void changePlayerRole(Player player,FactionRole factionRole){
-        memberHashMap.put(player.getUniqueId(),factionRole); //maybe gonna need an f player class for that
+        memberHashMap.put(player.getUniqueId(),factionRole); //change the value of the player role
     }
 
     public void calculateFactionPower(){
