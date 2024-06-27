@@ -26,7 +26,6 @@ public final class InfactionsCore extends JavaPlugin {
 
         SnippedTest.testSnippet();
         getLogger().info("InfactionsCore has started!");//logger message
-        getLogger().info(FactionManager.getInstance().factionArrayList.getFirst().toString());
     }
 
     @Override

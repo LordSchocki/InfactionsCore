@@ -19,7 +19,7 @@ public class FactionCommand extends Command {
     public boolean execute(@NotNull CommandSender sender, @NotNull String commandLabel, @NotNull String[] args) {
         //this method is called when the command gets executed
 
-        if (CommandManager.getInstance().checkIfPlayerNoPermission(sender, "infactions.factioncommand")) {//first check if the sender has the permission
+        if (CommandManager.getInstance().checkIfPlayerNoPermission(sender, "infactionscore.factioncommand")) {//first check if the sender has the permission
             sender.sendMessage("No permission");//if not send an error message
             return false;
         }
