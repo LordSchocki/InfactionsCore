@@ -32,6 +32,7 @@ public class FactionHelpCommand extends Command { //command to see all other fac
         final TextColor customRedColor = TextColor.fromHexString("#e32064");
         final TextColor lighterRedColor = TextColor.fromHexString("#ff6666");
         return Component.text()
+                .append(Component.newline())
                 .append(Component.text("Here are some useful Commands: ", customRedColor))
                 .append(Component.newline())
                 .append(Component.newline())
