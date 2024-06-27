@@ -15,7 +15,7 @@ public class Faction { //this is a faction class it will hold the name of the fa
     private int factionPower;//power of a faction
     private ArrayList<Chunk> claimedChunkArrayList;
 
-    public Faction(String name,int factionPower,int factionBalance){
+    public Faction(String name,int factionPower){
         this.name = name;
         this.claimedChunkArrayList = new ArrayList<>();
         this.memberHashMap = new HashMap<>();
@@ -73,5 +73,18 @@ public class Faction { //this is a faction class it will hold the name of the fa
 
     public void removeChunkFromFaction(Chunk chunk){
         claimedChunkArrayList.remove(chunk);
+    }
+
+    public boolean playerInFaction(Player player){
+        boolean result = false;
+        UUID playerUuid = player.getUniqueId();
+
+        for (UUID uuid: memberHashMap.keySet()){
+            if (uuid == playerUuid){
+                result = true;
+                break;
+            }
+        }
+        return result;
     }
 }
