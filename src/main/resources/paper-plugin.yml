@@ -9,15 +9,21 @@ authors:
   - skuchsa44
 
 commands:
+
   faction:
+    description: Used as a prefix for other faction related commands
+    usage: /faction [Command]
+    permission: infactionscore.factioncommand
+
+  fhelp:
     description: See other faction commands
     usage: /faction help
-    aliases: [factions]
     permission: infactionscore.factionhelp
-  faction list:
+  flist:
     description: See other factions on the server
     usage: /faction list
     permission: infactionscore.factionlist
+
 
 permissions:
   infactionscore.factionhelp:
@@ -26,3 +32,7 @@ permissions:
   infactionscore.factionlist:
     description: Allows use of the faction list command
     default: true
+  infactionscore.factioncommand:
+    description: Permission to use the prefix command
+    default: true
+
