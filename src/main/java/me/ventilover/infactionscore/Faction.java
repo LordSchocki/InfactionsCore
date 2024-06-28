@@ -26,6 +26,14 @@ public class Faction { //this is a faction class it will hold the name of the fa
         return name;
     }
 
+    public int getFactionPower() {
+        return factionPower;
+    }
+
+    public ArrayList<Chunk> getClaimedChunkArrayList() {
+        return claimedChunkArrayList;
+    }
+
     public void addPlayerToFaction(Player player, FactionRole factionRole){
         //method to add a player into the faction
         memberHashMap.put(player.getUniqueId(),factionRole);
@@ -87,4 +95,6 @@ public class Faction { //this is a faction class it will hold the name of the fa
         }
         return result;
     }
+
+
 }
