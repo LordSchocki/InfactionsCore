@@ -24,7 +24,6 @@ public final class InfactionsCore extends JavaPlugin {
 
         commandMap.register("faction", new FactionCommand());
 
-        SnippedTest.testSnippet();
         getLogger().info("InfactionsCore has started!");//logger message
     }
 
