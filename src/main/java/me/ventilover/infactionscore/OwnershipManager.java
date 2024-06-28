@@ -21,26 +21,55 @@ public class OwnershipManager { //another singleton class
     }
     //end of the singleton layout
 
-    public boolean playerCanClaimChunk(Player player, Chunk chunk) throws PlayerNotInFactionException,NoSuchElementException{
+    public boolean playerCanClaimChunk(Player player, Chunk chunk) throws PlayerNotInFactionException, NoSuchElementException, FactionPowerException, ChunkAlreadyOwnedException, FactionRoleException {
         Faction playerFaction;
         playerFaction = FactionManager.getInstance().getFactionFromPlayer(player); //throws an exception if not found the faction
 
-        return playerHasRightRole(player, playerFaction) && ChunkIsNotOwned() && factionHasEnoughPower();
-    }
+        playerHasRightRole(player, playerFaction);
+        factionHasEnoughPower(playerFaction);
+        checkIfChunkIsNotOwned(chunk);
 
-    private boolean playerHasRightRole(Player player, Faction faction){
-        return faction.checkFactionRole(player) == Faction.FactionRole.LEADER || faction.checkFactionRole(player) == Faction.FactionRole.CO_LEADER;
 
-    }
-
-    private boolean factionHasEnoughPower(){
-        //NEEDS TO BE COMPLETED
         return true;
     }
 
-    private boolean ChunkIsNotOwned(){
-        //NEEDS TO BE COMPLETED
-        return true;
+    private void playerHasRightRole(Player player, Faction faction) throws FactionRoleException {
+        if (faction.checkFactionRole(player) != Faction.FactionRole.LEADER && faction.checkFactionRole(player) != Faction.FactionRole.CO_LEADER){
+            throw new FactionRoleException("PLayer is not Leader or Co leader");
+        }
+
+    }
+
+    private void factionHasEnoughPower(Faction faction) throws FactionPowerException { //method to check if a faction has more power than chunks
+        faction.calculateFactionPower(); //first update the faction power
+
+        if (faction.getFactionPower() < countFactionChunks(faction)){
+            throw new FactionPowerException("Faction does have more chunks than power");
+        }
+
+    }
+
+    private void checkIfChunkIsNotOwned(Chunk chunk) throws ChunkAlreadyOwnedException {
+        boolean result = true;
+
+        for (Faction faction : FactionManager.getInstance().factionArrayList){ //for each faction go through the chunks
+            if (faction.getClaimedChunkArrayList().contains(chunk)){
+                result = false; //when the chunk is found, it is already claimed
+                break;
+            }
+        }
+        if (!result){
+            throw new ChunkAlreadyOwnedException("This chunk is already owned");
+        }
+
+    }
+
+    private int countFactionChunks(Faction faction){
+        int result = 0;
+        for (Chunk ignored : faction.getClaimedChunkArrayList()){
+            result++;
+        }
+        return result;
     }
 
 }
