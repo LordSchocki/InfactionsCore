@@ -13,7 +13,7 @@ public class Faction { //this is a faction class it will hold the name of the fa
     private final String name;
     private final HashMap<UUID,FactionRole> memberHashMap;
     private int factionPower;//power of a faction
-    private ArrayList<Chunk> claimedChunkArrayList;
+    private final ArrayList<Chunk> claimedChunkArrayList;
 
     public Faction(String name,int factionPower){
         this.name = name;
