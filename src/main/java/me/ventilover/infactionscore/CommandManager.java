@@ -6,7 +6,7 @@ import org.bukkit.command.CommandSender;
 import java.util.HashMap;
 
 public class CommandManager {//singleton class
-    //class to manage commands and prompts for commands
+    // to manage commands and prompts for commands
 
     private CommandManager(){
         //block constructor
