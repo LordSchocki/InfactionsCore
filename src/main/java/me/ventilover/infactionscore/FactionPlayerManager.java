@@ -1,6 +1,7 @@
 package me.ventilover.infactionscore;
 
 import java.util.HashMap;
+import java.util.NoSuchElementException;
 import java.util.UUID;
 
 public class FactionPlayerManager {//singleton class
@@ -22,7 +23,12 @@ public class FactionPlayerManager {//singleton class
         factionPlayerHashMap.put(playerId,factionPlayer);
     }
 
-    public FactionPlayer getFactionPlayer(UUID playerId){
+    public FactionPlayer getFactionPlayer(UUID playerId) throws NoSuchElementException {
+        if (!factionPlayerHashMap.containsKey(playerId)){
+            throw new NoSuchElementException("No fplayer in hashmap");
+        }
+
+
         return factionPlayerHashMap.get(playerId);
     }
 }
