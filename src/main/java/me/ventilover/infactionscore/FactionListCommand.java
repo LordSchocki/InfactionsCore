@@ -37,6 +37,8 @@ public class FactionListCommand extends Command {
         //check if the list is empty
         if (FactionManager.getInstance().factionArrayList.isEmpty()){
             return Component.text()
+                    .append(Component.text("[!]",darkerRedColor))
+                    .appendSpace()
                     .append(Component.text("No Factions there to show!",lighterRedColor)) //we do this to even check if factions exist
                     .appendSpace()
                     .append(Component.text("[!]",darkerRedColor))
