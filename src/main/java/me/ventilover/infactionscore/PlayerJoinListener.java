@@ -16,5 +16,6 @@ public class PlayerJoinListener implements Listener {
             FactionPlayerManager.getInstance().addFactionPlayer(event.getPlayer().getUniqueId(), new FactionPlayer(10)); //start power is 10
         }
 
+        FactionPowerManager.getInstance().createPlayerPowerCountDown(event.getPlayer().getUniqueId());
     }
 }
