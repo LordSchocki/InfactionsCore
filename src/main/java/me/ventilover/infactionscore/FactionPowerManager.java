@@ -1,5 +1,6 @@
 package me.ventilover.infactionscore;
 
+import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import java.util.HashMap;
 import java.util.UUID;
@@ -29,9 +30,10 @@ public class FactionPowerManager {
         int taskId;
 
 
-        taskId = Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(InfactionsCore.instance, () ->
+        taskId = Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(InfactionsCore.instance, () -> {
+            FactionPlayerManager.getInstance().getFactionPlayer(playerId).addPower(1);
 
-                FactionPlayerManager.getInstance().getFactionPlayer(playerId).addPower(1), 0L, 12000L);
+        },0,24000L); //for testing purposes lower
 
         taskHashMap.put(playerId, taskId);
 
