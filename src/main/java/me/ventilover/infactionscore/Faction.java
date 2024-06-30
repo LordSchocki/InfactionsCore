@@ -3,12 +3,13 @@ package me.ventilover.infactionscore;
 import org.bukkit.Chunk;
 import org.bukkit.entity.Player;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-public class Faction { //this is a faction class it will hold the name of the faction, claim amount, etc.
+public class Faction implements Serializable { //this is a faction class it will hold the name of the faction, claim amount, etc.
     //variables for the faction
     private final String name;
     private final HashMap<UUID,FactionRole> memberHashMap;
