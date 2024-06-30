@@ -26,7 +26,7 @@ public final class InfactionsCore extends JavaPlugin {
 
         commandMap.register("faction", new FactionCommand());
 
-        DataSafeManager.getInstance().loadFactionsFromFile();
+        DataSafeManager.getInstance().safeAllData();
 
         getLogger().info("InfactionsCore has started!");//logger message
     }
@@ -34,7 +34,7 @@ public final class InfactionsCore extends JavaPlugin {
     @Override
     public void onDisable() {
         // Plugin shutdown logic
-        DataSafeManager.getInstance().saveFactionsToFile();
+        DataSafeManager.getInstance().loadFactionsFromFile();
 
         getLogger().info("InfactionsCore has stopped!");
     }
