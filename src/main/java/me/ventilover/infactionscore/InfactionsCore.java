@@ -34,7 +34,7 @@ public final class InfactionsCore extends JavaPlugin {
     @Override
     public void onDisable() {
         // Plugin shutdown logic
-        DataSafeManager.getInstance().loadFactionsFromFile();
+        DataSafeManager.getInstance().loadAllData();
 
         getLogger().info("InfactionsCore has stopped!");
     }
