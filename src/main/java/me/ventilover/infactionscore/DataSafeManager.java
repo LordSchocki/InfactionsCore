@@ -26,21 +26,25 @@ public class DataSafeManager { //singleton class
         saveFactionsToFile();
     }
     public void loadAllData(){
+        //logic to load data
+        //method for all the sub load methods
         loadFactionsFromFile();
     }
 
-    public void saveFactionsToFile() {
+    public void saveFactionsToFile() { //method to safe all the factions (faction arraylist)
+
+
         if (FactionManager.getInstance().factionArrayList.isEmpty()){
-            InfactionsCore.instance.getLogger().info("NO FACTIONS TO SAFE");
+            InfactionsCore.instance.getLogger().info("NO FACTIONS TO SAFE");//Don't safe if the list is empty
             return;
         }
-
+        //then start an output stream
         try {
-            FileOutputStream fileOut = new FileOutputStream("factions.ser");
-            ObjectOutputStream out = new ObjectOutputStream(fileOut);
-            out.writeObject(FactionManager.getInstance().factionArrayList);
+            FileOutputStream fileOut = new FileOutputStream("factions.ser"); //start the stream
+            ObjectOutputStream out = new ObjectOutputStream(fileOut);//start the object stream
+            out.writeObject(FactionManager.getInstance().factionArrayList); //now we write the faction array list into byte format
             out.close();
-            fileOut.close();
+            fileOut.close();//closing streams
         } catch (IOException e) {
             InfactionsCore.instance.getLogger().info(e.getMessage());
         }
@@ -50,22 +54,23 @@ public class DataSafeManager { //singleton class
 
         File file = new File("factions.ser");
         if (!file.exists()){
-            InfactionsCore.instance.getLogger().info("FILE DOES NOT EXIST");
+            InfactionsCore.instance.getLogger().info("FILE DOES NOT EXIST"); //first check
+            // if the ser file exists, we cant load from nothing
             return;
         }
 
         try {
-            FileInputStream fileIn = new FileInputStream("factions.ser");
+            FileInputStream fileIn = new FileInputStream("factions.ser");//new streams
             ObjectInputStream in = new ObjectInputStream(fileIn);
             Object obj = in.readObject();
             if (obj instanceof ArrayList) {
                 //noinspection unchecked
 
-                FactionManager.getInstance().factionArrayList = (ArrayList<Faction>) obj;
+                FactionManager.getInstance().factionArrayList = (ArrayList<Faction>) obj; //casting the object back to the arraylist
                 InfactionsCore.instance.getLogger().info("CLASS NOT INSTANCE OF ARRAYLIST");
             }
             in.close();
-            fileIn.close();
+            fileIn.close();//close streams
         } catch (IOException | ClassNotFoundException e) {
             InfactionsCore.instance.getLogger().info(e.getMessage());
         }
