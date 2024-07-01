@@ -1,6 +1,7 @@
 package me.ventilover.infactionscore;
 
 import org.bukkit.Chunk;
+import org.bukkit.World;
 import org.bukkit.entity.Player;
 
 import java.util.NoSuchElementException;
@@ -21,13 +22,13 @@ public class OwnershipManager { //another singleton class
     }
     //end of the singleton layout
 
-    public boolean playerCanClaimChunk(Player player, Chunk chunk) throws PlayerNotInFactionException, NoSuchElementException, FactionPowerException, ChunkAlreadyOwnedException, FactionRoleException {
+    public boolean playerCanClaimChunk(Player player, Chunk chunk,World world) throws PlayerNotInFactionException, NoSuchElementException, FactionPowerException, ChunkAlreadyOwnedException, FactionRoleException {
         Faction playerFaction;
         playerFaction = FactionManager.getInstance().getFactionFromPlayer(player); //throws an exception if not found the faction
 
         playerHasRightRole(player, playerFaction);
-        factionHasEnoughPower(playerFaction);
-        checkIfChunkIsNotOwned(chunk);
+        factionHasEnoughPower(playerFaction,world);
+        checkIfChunkIsNotOwned(chunk,world);
 
 
         return true;
@@ -40,20 +41,20 @@ public class OwnershipManager { //another singleton class
 
     }
 
-    private void factionHasEnoughPower(Faction faction) throws FactionPowerException { //method to check if a faction has more power than chunks
+    private void factionHasEnoughPower(Faction faction,World world) throws FactionPowerException { //method to check if a faction has more power than chunks
         faction.calculateFactionPower(); //first update the faction power
 
-        if (faction.getFactionPower() < countFactionChunks(faction)){
+        if (faction.getFactionPower() < countFactionChunks(faction,world)){
             throw new FactionPowerException("Faction does have more chunks than power");
         }
 
     }
 
-    private void checkIfChunkIsNotOwned(Chunk chunk) throws ChunkAlreadyOwnedException {
+    private void checkIfChunkIsNotOwned(Chunk chunk,World world) throws ChunkAlreadyOwnedException {
         boolean result = true;
 
         for (Faction faction : FactionManager.getInstance().factionArrayList){ //for each faction go through the chunks
-            if (faction.getClaimedChunkArrayList().contains(chunk)){
+            if (faction.getClaimedChunkArrayList(world).contains(chunk)){
                 result = false; //when the chunk is found, it is already claimed
                 break;
             }
@@ -64,9 +65,9 @@ public class OwnershipManager { //another singleton class
 
     }
 
-    private int countFactionChunks(Faction faction){
+    private int countFactionChunks(Faction faction, World world){
         int result = 0;
-        for (Chunk ignored : faction.getClaimedChunkArrayList()){
+        for (Chunk ignored : faction.getClaimedChunkArrayList(world)){
             result++;
         }
         return result;
