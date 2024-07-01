@@ -23,15 +23,18 @@ public class DataSafeManager { //singleton class
     public void safeAllData(){
         //logic to safe later data
         //this ist the method for all the sub methods like safe factions names etc...
+        InfactionsCore.instance.getLogger().info("START STORING FACTION DATA");
         saveFactionsToFile();
     }
     public void loadAllData(){
         //logic to load data
         //method for all the sub load methods
+        InfactionsCore.instance.getLogger().info("START LOADING FACTION DATA");
         loadFactionsFromFile();
     }
 
     public void saveFactionsToFile() { //method to safe all the factions (faction arraylist)
+
 
 
         if (FactionManager.getInstance().factionArrayList.isEmpty()){
@@ -67,6 +70,9 @@ public class DataSafeManager { //singleton class
                 //noinspection unchecked
 
                 FactionManager.getInstance().factionArrayList = (ArrayList<Faction>) obj; //casting the object back to the arraylist
+
+            }
+            else {
                 InfactionsCore.instance.getLogger().info("CLASS NOT INSTANCE OF ARRAYLIST");
             }
             in.close();
