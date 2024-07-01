@@ -1,6 +1,7 @@
 package me.ventilover.infactionscore;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Chunk;
 import org.bukkit.command.CommandMap;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -26,7 +27,7 @@ public final class InfactionsCore extends JavaPlugin {
 
         commandMap.register("faction", new FactionCommand());
 
-        DataSafeManager.getInstance().safeAllData();
+        DataSafeManager.getInstance().loadAllData();
 
         getLogger().info("InfactionsCore has started!");//logger message
     }
@@ -34,7 +35,7 @@ public final class InfactionsCore extends JavaPlugin {
     @Override
     public void onDisable() {
         // Plugin shutdown logic
-        DataSafeManager.getInstance().loadAllData();
+        DataSafeManager.getInstance().safeAllData();
 
         getLogger().info("InfactionsCore has stopped!");
     }
