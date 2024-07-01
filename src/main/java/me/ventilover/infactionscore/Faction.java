@@ -1,7 +1,9 @@
 package me.ventilover.infactionscore;
 
 import org.bukkit.Chunk;
+import org.bukkit.World;
 import org.bukkit.entity.Player;
+
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -14,7 +16,7 @@ public class Faction implements Serializable { //this is a faction class it will
     private final String name;
     private final HashMap<UUID,FactionRole> memberHashMap;
     private int factionPower;//power of a faction
-    private final ArrayList<Chunk> claimedChunkArrayList;
+    private final ArrayList<FactionChunk> claimedChunkArrayList;
 
     public Faction(String name,int factionPower){
         this.name = name;
@@ -31,8 +33,14 @@ public class Faction implements Serializable { //this is a faction class it will
         return factionPower;
     }
 
-    public ArrayList<Chunk> getClaimedChunkArrayList() {
-        return claimedChunkArrayList;
+    public ArrayList<Chunk> getClaimedChunkArrayList(World world) {
+        ArrayList<Chunk> chunkArrayList = new ArrayList<>();
+        for (FactionChunk fChunk : claimedChunkArrayList){
+            chunkArrayList.add(fChunk.toChunk(world));
+        }
+
+
+        return chunkArrayList;
     }
 
     public void addPlayerToFaction(Player player, FactionRole factionRole){
@@ -77,10 +85,10 @@ public class Faction implements Serializable { //this is a faction class it will
     }
 
     public void addChunkToFaction(Chunk chunk){
-        claimedChunkArrayList.add(chunk);
+        claimedChunkArrayList.add(new FactionChunk(chunk));
     }
 
-    public void removeChunkFromFaction(Chunk chunk){
+    public void removeChunkFromFaction(FactionChunk chunk){
         claimedChunkArrayList.remove(chunk);
     }
 
