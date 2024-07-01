@@ -1,7 +1,6 @@
 package me.ventilover.infactionscore;
 
 import org.bukkit.Bukkit;
-import org.bukkit.Chunk;
 import org.bukkit.command.CommandMap;
 import org.bukkit.plugin.java.JavaPlugin;
 
